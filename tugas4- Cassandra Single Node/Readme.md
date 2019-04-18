@@ -3,8 +3,8 @@ Implementasi instalasi Cassandra Single Node & Operasi CRUD yang dilakukan
 
 ## Daftar Isi
 1. [Pengantar](#1-pengantar)
-    1.1 [Apa Itu Cassandra](#11-apa_itu_cassandra)
-    1.2 [Arsitektur Server](#12-arsitektur_server)
+    -   [Apa Itu Cassandra](#11-apa_itu_cassandra)
+    -   [Arsitektur Server](#12-arsitektur_server)
 2. [Instalasi](#2-instalasi)
 3. [Pemilihan Dataset](#3-dataset)
 4. [CRUD Data](#4-crud)
