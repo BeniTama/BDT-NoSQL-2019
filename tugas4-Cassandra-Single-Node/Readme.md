@@ -11,6 +11,11 @@ Implementasi instalasi Cassandra Single Node & Operasi CRUD yang dilakukan
     -   [Instalasi Cassandra](#23-instalasi-cassandra)
 3. [Pemilihan Dataset](#3-dataset)
 4. [CRUD Data](#4-crud)
+	- [Import Dataset](#41-impor-dataset)
+	- [Melihat Data](#42-melihat-data)
+	- [Membuat Entry Data](#43-membuat-data)
+	- [Memodifikasi/Memperbaharui Data](#44-mengubah-data)
+	- [Menghapus Data](#45-menghapus-data)
 5. [Referensi](#5-referensi)
 
 ## 1. Pengantar
@@ -149,7 +154,88 @@ Dataset ini dipilih karena ukurannya yang kecil dan jumlah kolomya mempermudah o
 
 ## 4. CRUD Data
 ### 4.1 Impor Dataset
+Untuk melakukan impor data, salin file csv yang ingin diimpor dari folder vagrant ke node yang digunakan. Untuk menyalin file, gunakan perintah berikut:
+```
+sudo cp '/vagrant/Hostel.csv' 'Hostel.csv'
+```
+Perintah ini akan memindahkan file yang bernama 'Hostel.csv' dari folder vagrant yang digunakan ke direktori awal dari node server. File yang akan tersalin akan dinamakan 'Hostel.csv'.
 
+Setelah file csv berhasil tersalin dalam node1, operasi impor data dan CRUD dapat dijalankan dalam CQL. Untuk mengakses CQL gunakan command ``cqlsh``.
+Setelah berhasil masuk ke CQL, harus dibuat keyspace untuk lokasi tabel dimana dataset akan diimpor. Untuk membuat keyspace gunakan perintah seperti berikut:
+```
+CREATE KEYSPACE hostel
+  WITH REPLICATION = {
+  'class' : 'NetworkTopologyStrategy',
+  'datacenter1' : 1
+};
+```
+Setelah keyspace dibuat gunakan keyspace dengan perintah ``USE hostel``.
+Hasil dari operasi login ke cqlsh dan pembuatan keyspace seperti gambar dibawah ini:
+![](/tugas4-Cassandra-Single-Node/pictures/create-keyspace.PNG)
+
+Setelah menggunakan keyspace yang sudah dibuat. Impor file csv dapat dilakukan. Lakukan impor dengan perintah berikut:
+```
+COPY hostel_list(id, hostel_name, city, price_from, distance, summary_score, rating_band, atmosphere, cleanliness, facilities, location_y, security, staff, valueformoney, lon, lat) FROM 'Hostel.csv' WITH DELIMITER = ',' AND HEADER = TRUE;
+```
+Jika muncul keluaran seperti gambar dibawah ini artinya impor data telah berhasil.
+![](/tugas4-Cassandra-Single-Node/pictures/import-table.PNG)
+
+### 4.2. Melihat Data
+Untuk melihat semua data yang sudah diimpor lakukan perintah berikut:
+```
+SELECT * FROM hostel_list;
+```
+Keluaran yang ada seperti gambar dibawah ini:
+![](/tugas4-Cassandra-Single-Node/pictures/import-complete.PNG)
+
+### 4.3 Membuat Data
+Berikut adalah percobaan memasukkan data baru pada tabel. Data yang akan dimasukkan adalah seperti berikut:
+```
+id = 343
+hostel_name = Hostel Nakamura
+City = Kobe
+price.from = 2300
+Distance = 2.3km from city centre
+summary_score = 8.5
+rating.band = Fabulous
+atmosphere = 7.8
+cleanliness = 8.1
+facilities = 7.8
+location.y = 9.0
+security = 8.7
+staff = 9.1
+valueformoney = 9.0
+lon = 135.1731553
+lat = 34.677261
+```
+Data berikut akan dimasukkan kedalam tabel dengan perintah berikut:
+```
+INSERT INTO hostel_list(id, hostel_name, city, price_from, distance, summary_score, rating_band, atmosphere, cleanliness, facilities, location_y, security, staff, valueformoney, lon, lat) VALUES (343, 'Hostel Nakamura', 'Kobe', '2300', '2.3km from city centre', '8.5', 'Fabulous', '7.8', '8.1', '7.8', '9.0', '8.7', '9.1', '9.0', '135.1731553', '34.677261');
+```
+Setelah itu select data yang baru dimasukkan untuk melihat datanya berhasil masuk atau tidak, seperti pada gambar berikut:
+![insert-data](/tugas4-Cassandra-Single-Node/pictures/insert-data.PNG)
+
+### 4.4 Mengubah Data
+Pada bagian ini akan dijelaskan proses modifikasi data dalam Cassandra. Data yang akan dimodifikasi adalah pada entri dengan id 91, yaitu pada entri Guest House Hokorobi. Entri data dalam sampel ini belum memiliki garis lintang dan garis bujur. Percobaan kali adalah untuk menambahkan data lintang dan bujur tempat itu.
+
+Data yang akan ditambahkan adalah sebagai berikut:
+```
+lat = 33.57771
+lon = 130.3364923
+```
+
+Update data dilakukan dengan perintah berikut:
+```
+UPDATE hostel_list SET lat = '33.57771', lon = '130.3364923' WHERE id=91;
+```
+Hasilnya akan seperti berikut:
+![update-complete](/tugas4-Cassandra-Single-Node/pictures/update-complete.PNG)
+
+### 4.5 Menghapus Data
+Pada bagian ini akan dijelaskan proses penghapusan data dalam Cassandra. Data yang akan dihapus adalah data dengan entri id 214. Untuk melakukan penghapusan data lakukan perintah berikut:
+```
+DELETE FROM hostel_list WHERE id = 214;
+```
 
 ## 5. Referensi
 https://www.digitalocean.com/community/tutorials/how-to-install-cassandra-and-run-a-single-node-cluster-on-ubuntu-14-04<br>
