@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+
+	config.vm.define "masternode" do |node|
+		node.vm.box = "bento/ubuntu-16.04"
+		node.vm.hostname = "masternode"
+		node.vm.network "private_network", ip: "192.168.88.10"
+		
+		node.vm.provider "virtualbox" do |vb|
+			vb.gui = false
+			vb.name = "masternode"
+			vb.memory = "2046"
+		end
+	end
+	
+	(1..2).each do |i|
+		config.vm.define "slavenode#{i}" do |node|
+			node.vm.box = "bento/ubuntu-16.04"
+			node.vm.hostname = "slavenode#{i}"
+			node.vm.network "private_network", ip: "192.168.88.1#{i}"
+			
+			node.vm.provider "virtualbox" do |vb|
+				vb.gui = false
+				vb.name = "slavenode#{i}"
+				vb.memory = "1024"
+			end
+		end
+	end
+end
