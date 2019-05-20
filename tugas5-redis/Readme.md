@@ -86,7 +86,7 @@ petunjuk sebagai berikut:
 protected-mode no
 port 6379
 dir .
-logfile "/home/redis-stable/redig.log" #output log
+logfile "/home/vagrant/redis-stable/redig.log" #output log
 ```
 - Slavenode redis.conf:
 ```
@@ -94,7 +94,7 @@ protected-mode no
 port 6379
 dir .
 slaveof 192.168.33.10 6379
-logfile "/home/redis-stable/redig.log" #output log
+logfile "/home/vagrant/redis-stable/redig.log" #output log
 ```
 Pada ``redis.conf`` sebaiknya dilakukan penghapusan pada line ``bind 127.0.0.1`` agar node mau menerima
 koneksi lain selain dari 127.0.0.1. Atau bisa dilakukan seperti ``# bind 127.0.0.1``
@@ -102,7 +102,7 @@ koneksi lain selain dari 127.0.0.1. Atau bisa dilakukan seperti ``# bind 127.0.0
 ```
 protected-mode no
 port 26379
-logfile "/home/redis-stable/sentinel.log"
+logfile "/home/vagrant/redis-stable/sentinel.log"
 sentinel monitor mymaster 192.168.33.10 6379 2
 sentinel down-after-milliseconds mymaster 5000
 sentinel failover-timeout mymaster 10000
