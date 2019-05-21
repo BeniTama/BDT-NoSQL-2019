@@ -19,7 +19,7 @@ Pada tugas ini, akan digunakan 4 buah server node:
 
 Awal dari instalasi tugas ini, akan dibuat 4 buah node untuk MySQL Cluster. Untuk melihat tata cara instalasi dari MySQL Cluster, dapat dilihat pada dokumentasi tugas berikut: 
 
-[implementasi-mysql_cluster]()
+[Tugas 1: Implementasi MySQL Cluster](https://github.com/BeniTama/MySQL-Cluster-with-Load-Balancer)
 
 Setelah melakukan instalasi MySQL Cluster, instalasi Wordpress dapat dilakukan. Dokumentasi tahapan instalasi terdapat pada link berikut:
 
