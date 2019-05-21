@@ -1,10 +1,9 @@
 # Tugas UAS Basis Data Terdistribusi - Wordpress Menggunakan MySQL dan Redis
 
 ## Daftar Isi
-1. [Model Arsitektur] (#1-model-arsitektur)
-2. [Proses Instalasi] (#2-proses-instalasi)
-3. [Konfigurasi Redis pada Wordpress] (#3-konfigurasi-wordpress-ke-redis)
-4. [Test Failover Redis] (#4-test-failover-redis)
+1. [Model Arsitektur](#1-model-arsitektur)
+2. [Proses Instalasi](#2-proses-instalasi)
+3. [Konfigurasi Redis pada Wordpress](#3-konfigurasi-redis-pada-wordpress)
 
 ## 1. Model Arsitektur
 Pada tugas ini, akan digunakan 4 buah server node:
