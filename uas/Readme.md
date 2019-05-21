@@ -23,7 +23,7 @@ Awal dari instalasi tugas ini, akan dibuat 4 buah node untuk MySQL Cluster. Untu
 
 Setelah melakukan instalasi MySQL Cluster, instalasi Wordpress dapat dilakukan. Dokumentasi tahapan instalasi terdapat pada link berikut:
 
-[mysql-cluster-wordpress]()
+[Tugas ETS: Wordpress pada MySQL Cluster](https://github.com/BeniTama/ETS-BDT-2019)
 
 Setelah instalasi Wordpress berhasil dilakukan, selanjutnya dilakukan instalasi Redis pada node clusterdb1 sebagai master dan clusterdb2 & clusterdb3 sebagai slave redis. Tata cara instalasi redis dapat ditemukan dalam dokumentasi berikut:
 
